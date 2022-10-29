@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,10 +14,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-
     return view('welcome');
 });
-Route::get('/user/subscribe', function (Request $request) {
-    $user=\App\User::query()->first();
+
+Route::get('/user',function (){
+    if(\App\Models\User::query()->count()==0)
+    \App\Models\User::query()->create([
+        'name'=>'hamza',
+        'email'=>'hamza@gmail.com',
+        'password'=>bcrypt('12345678')
+    ]);
+});
+
+Route::get('/subscribe', function (Request $request) {
+    $user=\App\Models\User::query()->first();
     return view('subsribtion', [ 'payLink' => $user->charge(12.99, 'Action Figure')]);
 });
