@@ -28,7 +28,7 @@ Route::get('/user',function (){
 
 Route::get('/subscribe', function (Request $request) {
     $user=\App\Models\User::query()->first();
-    return view('subsribtion', [ 'payLink' => $user->charge(12.99, 'Action Figure')]);
+    return view('subscription', [ 'payLink' => $user->charge(12.99, 'Action Figure')]);
 });
 
 Route::get('/web-hook',function (){})->name('cashier.webhook');
