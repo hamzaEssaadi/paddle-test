@@ -28,6 +28,7 @@ Route::get('/user',function (){
 
 Route::get('/subscribe', function (Request $request) {
     $user=\App\Models\User::query()->first();
+    dd(config('cashier.public_key'));
     return view('subscription', [ 'payLink' => $user->charge(12.99, 'Action Figure')]);
 });
 
